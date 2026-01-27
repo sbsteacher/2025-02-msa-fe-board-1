@@ -4,6 +4,10 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
+      path: '/',
+      component: () => import('../views/BoardList.vue'),
+    },
+    {
       path: '/write',
       component: () => import('../views/WriteMod.vue'),
     },

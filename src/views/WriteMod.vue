@@ -3,6 +3,9 @@ import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import httpService from '@/services/httpService';
 
+//주소 이동할때 
+const router = useRouter();
+
 const state = reactive({
     board: {
         title: '',
@@ -24,6 +27,15 @@ const submit = async () => {
     }
     const result = await httpService.save(state.board);
     console.log('result:', result);
+
+    //result가 성공이면 제목, 내용 적혀있는거 모두 삭제해 주세요.
+    if(result === '성공') {
+        state.board.title = '';
+        state.board.contents = '';
+        router.push({
+            path: '/'
+        });
+    }
 }
 
 </script>
