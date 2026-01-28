@@ -1,13 +1,16 @@
 <script setup>
-import { reactive } from 'vue';
-import { useRouter } from 'vue-router';
+import { reactive, onMounted } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 import httpService from '@/services/httpService';
 
-//주소 이동할때 
+//Path Variable 값 가져올 때 
+const route = useRoute();
+//주소 이동할 때 
 const router = useRouter();
 
 const state = reactive({
     board: {
+        id: 0,
         title: '',
         contents: ''
     }
@@ -39,6 +42,13 @@ const submit = async () => {
         alert('등록에 실패하였습니다.');
     }
 }
+
+onMounted(async () => {
+    if(route.params.id) {
+        const id = route.params.id;
+        state.board = await httpService.findById(id);
+    }
+});
 
 </script>
 

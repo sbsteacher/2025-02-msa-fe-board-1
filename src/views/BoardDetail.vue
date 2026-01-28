@@ -3,7 +3,6 @@ import { reactive, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import httpService from '@/services/httpService';
 
-
 const route = useRoute();
 const router = useRouter();
 
@@ -48,7 +47,9 @@ const doDelete = async () => {
 <div>내용: {{ state.data.contents }}</div>
 <div>
     <button @click="doDelete">삭제</button>
-    <button>수정</button>
+    <router-link :to="`/mod/${state.data.id}`">
+        <button>수정</button>
+    </router-link>
 </div>
 </template>
 
