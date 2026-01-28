@@ -14,5 +14,5 @@
 </template>
 
 <style scoped>
-
+a { text-decoration: none; }
 </style>

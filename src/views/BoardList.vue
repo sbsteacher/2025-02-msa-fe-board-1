@@ -17,7 +17,9 @@ onMounted(async () => {
 const moveToDetail = id => {
     //router와 id를 이용하여 주소 이동~~~~
     console.log('moveToDetail - id: ', id);
-    
+    router.push({
+        path: `/detail/${id}`
+    });
 }
 </script>
 
@@ -43,4 +45,9 @@ const moveToDetail = id => {
 table { border-collapse: collapse; }
 table, th, td { border: 1px solid #ccc; }
 th, td { padding: 10px; }
+
+td { cursor: pointer;  }
+tr:hover { background-color: aliceblue; }
+tr:first-child { background-color: gray; }
+
 </style>
