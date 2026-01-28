@@ -18,6 +18,11 @@ class HttpService {
         return res.data;
     }
 
+    async update(params) {
+        const res = await axios.put('/board', params);
+        return res.data;
+    }
+
     async delete(params) {
         const res = await axios.delete('/board', { params });
         return res.data;
