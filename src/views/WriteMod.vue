@@ -35,6 +35,8 @@ const submit = async () => {
         router.push({
             path: '/'
         });
+    } else {
+        alert('등록에 실패하였습니다.');
     }
 }
 

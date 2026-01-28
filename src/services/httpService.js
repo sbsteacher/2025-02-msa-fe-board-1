@@ -2,8 +2,8 @@ import axios from 'axios';
 axios.defaults.baseURL = 'http://localhost:8080'
 
 class HttpService {
-    async save(jsonBody) {
-        const res = await axios.post('/board', jsonBody);
+    async save(params) {
+        const res = await axios.post('/board', params);
         return res.data;
     }
 
