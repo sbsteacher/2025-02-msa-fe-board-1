@@ -14,8 +14,12 @@ class HttpService {
 
     // @GetMapping("/board/{id}") 얘랑 통신할 수 있는 메소드 명시
     async findById(id) {
-        const res = await axios.get(`/board/${id}`);
-        console.log(res);
+        const res = await axios.get(`/board/${id}`);        
+        return res.data;
+    }
+
+    async delete(params) {
+        const res = await axios.delete('/board', { params });
         return res.data;
     }
 }
