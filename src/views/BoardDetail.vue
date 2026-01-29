@@ -16,6 +16,7 @@ const state = reactive({
 });
 
 onMounted(async () => {
+    console.log('typeof route.params.id: ', typeof route.params.id);
     console.log('route.params.id: ', route.params.id);
     const id = route.params.id;
     state.data = await httpService.findById(id);
@@ -28,10 +29,10 @@ const doDelete = async () => {
     }
 
     console.log('-- doDelete --');
-    const dddd = { 
+    const params = { 
         id: state.data.id
     }
-    const result = await httpService.delete(dddd);
+    const result = await httpService.delete(params);
     console.log('doDelete-result: ', result);
     if(result === 1) {
         router.push('/');

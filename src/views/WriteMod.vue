@@ -9,6 +9,7 @@ const route = useRoute();
 const router = useRouter();
 
 const state = reactive({
+    mode: '등록',
     board: {
         id: 0,
         title: '',
@@ -29,30 +30,19 @@ const submit = async () => {
         return;
     }
 
-    if(state.board.id === 0) {
-        const result = await httpService.save(state.board);
-        console.log('result:', result);
-
-        //result가 성공이면 제목, 내용 적혀있는거 모두 삭제해 주세요.
-        if(result === '성공') {
-            state.board.title = '';
-            state.board.contents = '';
-            router.push({
-                path: '/'
-            });
-        } else {
-            alert('등록에 실패하였습니다.');
-        }
-    } else { //수정
-        const result = await httpService.update(state.board);
-        if(result) {
-            router.push(`/detail/${state.board.id}`) //디테일 화면으로 이동!!!
-        }
-    }    
+    const result = await (state.board.id ? httpService.update(state.board) : httpService.save(state.board));
+    if(!result) {
+        alert(`글 ${state.mode}에 실패하였습니다.`);
+        return;
+    }
+    const path = state.board.id ? `/detail/${state.board.id}` : '/';
+    router.push(path)
+    
 }
 
 onMounted(async () => {
     if(route.params.id) {
+        state.mode = '수정';
         const id = route.params.id;
         state.board = await httpService.findById(id);
     }
@@ -61,7 +51,7 @@ onMounted(async () => {
 </script>
 
 <template>
-<h3>글쓰기</h3>
+<h3>글 {{state.mode}}</h3>
 <div>
     <label>제목: <input type="text" v-model="state.board.title"></label>
 </div>
